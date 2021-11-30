@@ -4,5 +4,17 @@ Rails.application.routes.draw do
 
     namespace :api do
 
+      #users
+      post '/users/create' => 'users#createGuest'
+
+      #sessions
+      post '/sessions' => "sessions#create"
+      delete '/sessions/delete' => 'sessions#destroy'
+      get '/authenticated' => 'sessions#authenticated'
+
+      #message
+      post '/message/create' => 'messages#create'
+      get '/messages' => 'messages#show'
+
     end
 end
