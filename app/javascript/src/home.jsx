@@ -33,7 +33,6 @@ class Home extends React.Component {
 
   this.fetchMessages();
 
-    this.submitMessage();
   }
 
   loginGuest = (e) => {
@@ -168,21 +167,22 @@ class Home extends React.Component {
       )
     }
 
-
     return(
       <Layout>
         <div className = "container">
           <div className = "row d-flex">
             <div className = "col-12">
               <div>
-                {messages.map((item, i) => {
+                {messages.length === 0? <div>you have no messages</div> : messages.map((item, i) => {
                   return <li key = {item.id}>{item.message}</li>
-                })}
+                })
+                }
               </div>
             </div>
             <form onSubmit = {this.submitMessage}>
               <input type="text" name="message" value= {message} onChange = {this.onChange} />
               <button type="submit" className = "btn btn-primary btn-sm" onClick = {this.submitMessage}>send message</button>
+              <button type="button" onClick = {setTimeout(this.fetchMessages, 3000)}>test</button>
             </form>
           </div>
         </div>
