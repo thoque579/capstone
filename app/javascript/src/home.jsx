@@ -15,8 +15,6 @@ class Home extends React.Component {
       messages: []
     }
     this.fetchMessages = this.fetchMessages.bind(this);
-
-    this.submitMessage = this.submitMessage.bind(this);
   }
 
 
