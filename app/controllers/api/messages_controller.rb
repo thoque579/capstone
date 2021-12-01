@@ -1,13 +1,9 @@
 module Api
   class MessagesController < ApplicationController
     def create
-      token = cookies.signed[:group_chat_session_token]
-      puts(token)
-      session = Session.find_by(token: token)
-      user = session.user
 
       # code
-      @message = user.messages.create(message_params)
+      @message = Message.new(username: params[:message][:username], message: params[:message][:message])
 
       if @message.save
         render '/api/messages/create', status: :created

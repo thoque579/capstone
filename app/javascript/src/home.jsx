@@ -10,7 +10,8 @@ class Home extends React.Component {
     this.state = {
       authenticated: false,
       message: '',
-      username: '',
+      guestUser: 'guestUser232321',
+      newUser: '',
       error: '',
       messages: []
     }
@@ -35,7 +36,7 @@ class Home extends React.Component {
 
   loginGuest = (e) => {
 
-    const { username } = this.state;
+    const { newUser } = this.state;
 
     if (e) {
       e.preventDefault();
@@ -48,7 +49,7 @@ class Home extends React.Component {
       method: "POST",
       body: JSON.stringify({
         user: {
-          username: username,
+          username: newUser,
         }
       })
     }))
@@ -69,7 +70,8 @@ class Home extends React.Component {
     .then(res => {
       console.log(res.message)
       this.setState({
-        messages: res.message
+        messages: res.message,
+        username: this.state.guestUser
       })
     })
   }
@@ -97,6 +99,7 @@ class Home extends React.Component {
       body: JSON.stringify({
         message: {
           message: this.state.message,
+          username: this.state.guestUser
         }
       })
     }))
@@ -123,7 +126,7 @@ class Home extends React.Component {
       method: "POST",
       body: JSON.stringify({
         user: {
-          username: this.state.username
+          username: this.state.newUser
         }
       })
     }))
@@ -137,39 +140,36 @@ class Home extends React.Component {
   }
   handleChange = (e) => {
     this.setState({
-      username: e.target.value,
+      newUser: e.target.value,
     })
   }
 
-  test = () => {
-
-  }
-
   render() {
-    const { authenticated, message, username, messages } = this.state;
+    const { authenticated, message, guestUser, messages, newUser } = this.state;
 
 
     console.log(messages);
 
-    if (!authenticated) {
+    {/*if (!authenticated) {
       return (
         <Layout>
-          <div className = "container">
-            <div className = "row">
-              <div className = "col-12">
-                <form onSubmit = {this.createGuest}>
-                  <label>Guest User</label>
-                  <input type="text"value= {this.state.username} onChange = {this.handleChange} className = "mr-2" required/>
-                </form>
-              </div>
-            </div>
-          </div>
+
         </Layout>
       )
-    }
+    }*/}
 
     return(
       <Layout>
+        <div className = "container">
+          <div className = "row">
+            <div className = "col-12">
+              <form onSubmit = {this.createGuest}>
+                <label>Guest User</label>
+                <input type="text" value = {guestUser} onChange = {this.handleChange} className = "mr-2" required/>
+              </form>
+            </div>
+          </div>
+        </div>
         <div className = "container">
           <div className = "row d-flex">
             <div className = "col-12">
@@ -183,7 +183,7 @@ class Home extends React.Component {
             <form onSubmit = {this.submitMessage}>
               <input type="text" name="message" value= {message} onChange = {this.onChange} />
               <button type="submit" className = "btn btn-primary btn-sm" onClick = {this.submitMessage}>send message</button>
-              <div hidden>{setTimeout(this.fetchMessages, 3000)}</div>
+              {/*<div hidden>{setTimeout(this.fetchMessages, 3000)}</div>*/}
             </form>
           </div>
         </div>
