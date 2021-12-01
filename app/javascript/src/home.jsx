@@ -3,14 +3,27 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Layout from '@src/layout';
 import { safeCredentials, handleErrors } from '@utils/fetchHelper';
+import Cookies from 'universal-cookie';
+
+let defaultGuestUser = "newGuest"
+
+let cookie = new Cookies();
+cookie.get('guestUser');
+if (typeof cookie.get('guestUser') === "undefined") {
+
+} else {
+  defaultGuestUser = cookie.get('guestUser');
+}
+
 
 class Home extends React.Component {
+
   constructor(props) {
     super(props)
     this.state = {
       authenticated: false,
       message: '',
-      guestUser: 'guestUser232321',
+      guestUser: defaultGuestUser,
       newUser: '',
       error: '',
       messages: []
@@ -23,7 +36,6 @@ class Home extends React.Component {
     fetch('/api/authenticated')
     .then(handleErrors)
     .then(res => {
-      console.log(res);
       this.setState({
         authenticated: res.authenticated
       })
@@ -32,7 +44,15 @@ class Home extends React.Component {
 
   this.fetchMessages();
 
+
+  const cookies = new Cookies();
+
+
+  console.log(cookies.get('guestUser')); // Pacman
+
+
   }
+
 
   loginGuest = (e) => {
 
@@ -68,7 +88,7 @@ class Home extends React.Component {
     fetch("/api/messages")
     .then(handleErrors)
     .then(res => {
-      console.log(res.message)
+
       this.setState({
         messages: res.message,
         username: this.state.guestUser
@@ -106,10 +126,13 @@ class Home extends React.Component {
     .then(handleErrors)
     .then(res => {
       this.setState({
-        message: res.userMessage.message
+        message: '',
       })
       this.fetchMessages();
-      console.log(res.userMessage)
+      const cookies = new Cookies();
+      cookies.set('guestUser', this.state.guestUser, { path: '/' });
+      console.log(cookies.get('guestUser'));
+      console.log('here');
     })
 
   }
@@ -140,15 +163,13 @@ class Home extends React.Component {
   }
   handleChange = (e) => {
     this.setState({
-      newUser: e.target.value,
+      guestUser: e.target.value,
     })
   }
 
   render() {
     const { authenticated, message, guestUser, messages, newUser } = this.state;
 
-
-    console.log(messages);
 
     {/*if (!authenticated) {
       return (
@@ -157,8 +178,6 @@ class Home extends React.Component {
         </Layout>
       )
     }*/}
-
-    console.log(guestUser);
 
     return(
       <Layout>
@@ -177,13 +196,13 @@ class Home extends React.Component {
             <div className = "col-12">
               <div>
                 {messages.length === 0? <div>you have no messages</div> : messages.map((item, i) => {
-                  return <li key = {item.id}>{item.message}</li>
+                  return <li key = {item.id}>{item.username}: {item.message} </li>
                 })
                 }
               </div>
             </div>
             <form onSubmit = {this.submitMessage}>
-              <input type="text" name="message" value= {message} onChange = {this.onChange} />
+              <input type="text" name="message" value= {message} onChange = {this.onChange} id = "message-input" />
               <button type="submit" className = "btn btn-primary btn-sm" onClick = {this.submitMessage}>send message</button>
               {/*<div hidden>{setTimeout(this.fetchMessages, 3000)}</div>*/}
             </form>
