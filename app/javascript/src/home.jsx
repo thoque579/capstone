@@ -4,13 +4,14 @@ import ReactDOM from 'react-dom';
 import Layout from '@src/layout';
 import { safeCredentials, handleErrors } from '@utils/fetchHelper';
 import Cookies from 'universal-cookie';
+import './home.scss'
 
 let defaultGuestUser = "newGuest"
 
 let cookie = new Cookies();
 cookie.get('guestUser');
 if (typeof cookie.get('guestUser') === "undefined") {
-
+  
 } else {
   defaultGuestUser = cookie.get('guestUser');
 }
@@ -48,7 +49,7 @@ class Home extends React.Component {
   const cookies = new Cookies();
 
 
-  console.log(cookies.get('guestUser')); // Pacman
+  console.log(cookies.get('guestUser'));
 
 
   }
@@ -119,7 +120,7 @@ class Home extends React.Component {
       body: JSON.stringify({
         message: {
           message: this.state.message,
-          username: this.state.guestUser
+          username: this.state.guestUser,
         }
       })
     }))
@@ -195,10 +196,12 @@ class Home extends React.Component {
           <div className = "row d-flex">
             <div className = "col-12">
               <div>
-                {messages.length === 0? <div>you have no messages</div> : messages.map((item, i) => {
-                  return <li key = {item.id}>{item.username}: {item.message} </li>
-                })
-                }
+                <ul className = "message-list">
+                  {messages.length === 0? <div>you have no messages</div> : messages.map((item, i) => {
+                    return <li key = {item.id}>{item.username}: {item.message} </li>
+                  })
+                  }
+                </ul>
               </div>
             </div>
             <form onSubmit = {this.submitMessage}>

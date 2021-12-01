@@ -15,10 +15,8 @@ ActiveRecord::Schema.define(version: 2021_11_29_233716) do
   create_table "messages", force: :cascade do |t|
     t.string "message"
     t.string "username"
-    t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -35,6 +33,5 @@ ActiveRecord::Schema.define(version: 2021_11_29_233716) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "messages", "users"
   add_foreign_key "sessions", "users"
 end

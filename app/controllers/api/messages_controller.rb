@@ -3,7 +3,7 @@ module Api
     def create
 
       # code
-      @message = Message.new(username: params[:message][:username], message: params[:message][:message])
+      @message = Message.create({username: params[:message][:username], message: params[:message][:message]})
 
       if @message.save
         render '/api/messages/create', status: :created
