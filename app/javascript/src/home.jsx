@@ -158,6 +158,8 @@ class Home extends React.Component {
       )
     }*/}
 
+    console.log(guestUser);
+
     return(
       <Layout>
         <div className = "container">
