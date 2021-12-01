@@ -143,6 +143,9 @@ class Home extends React.Component {
     })
   }
 
+  test = () => {
+
+  }
 
   render() {
     const { authenticated, message, username, messages } = this.state;
@@ -182,7 +185,7 @@ class Home extends React.Component {
             <form onSubmit = {this.submitMessage}>
               <input type="text" name="message" value= {message} onChange = {this.onChange} />
               <button type="submit" className = "btn btn-primary btn-sm" onClick = {this.submitMessage}>send message</button>
-              <button type="button" onClick = {setTimeout(this.fetchMessages, 3000)}>test</button>
+              <div hidden>{setTimeout(this.fetchMessages, 3000)}</div>
             </form>
           </div>
         </div>
