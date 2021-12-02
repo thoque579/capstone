@@ -11,7 +11,7 @@ let defaultGuestUser = "newGuest"
 let cookie = new Cookies();
 cookie.get('guestUser');
 if (typeof cookie.get('guestUser') === "undefined") {
-  
+
 } else {
   defaultGuestUser = cookie.get('guestUser');
 }
@@ -21,6 +21,7 @@ class Home extends React.Component {
 
   constructor(props) {
     super(props)
+    this.boxRef = React.createRef()
     this.state = {
       authenticated: false,
       message: '',
@@ -40,6 +41,8 @@ class Home extends React.Component {
       this.setState({
         authenticated: res.authenticated
       })
+
+
     })
 
 
@@ -54,6 +57,14 @@ class Home extends React.Component {
 
   }
 
+
+      scrollToBottom = () => {
+        this.boxRef.current.scrollTop = this.boxRef.current.scrollHeight - this.boxRef.current.clientHeight;
+      }
+
+      componentDidUpdate = () => {
+           this.scrollToBottom()
+       }
 
   loginGuest = (e) => {
 
@@ -132,12 +143,18 @@ class Home extends React.Component {
       this.fetchMessages();
       const cookies = new Cookies();
       cookies.set('guestUser', this.state.guestUser, { path: '/' });
+      let chatWindow = document.getElementById('container-ul');
+      this.scrollButton(chatWindow);
+
       console.log(cookies.get('guestUser'));
       console.log('here');
     })
 
   }
 
+  scrollButton = (id) => {
+    id.scrollTop = id.scrollHeight - id.clientHeight;
+  }
   createGuest = (e) => {
     if (e) {
       e.preventDefault();
@@ -180,13 +197,16 @@ class Home extends React.Component {
       )
     }*/}
 
+
     return(
+
+
       <Layout>
         <div className = "container">
           <div className = "row">
             <div className = "col-12">
               <form onSubmit = {this.createGuest}>
-                <label>Guest User</label>
+                <label className = "mr-2">Guest User</label>
                 <input type="text" value = {guestUser} onChange = {this.handleChange} className = "mr-2" required/>
               </form>
             </div>
@@ -195,10 +215,10 @@ class Home extends React.Component {
         <div className = "container">
           <div className = "row d-flex">
             <div className = "col-12">
-              <div>
-                <ul className = "message-list">
+              <div id = "container-ul">
+                <ul id = "message-list" ref = {this.boxRef}>
                   {messages.length === 0? <div>you have no messages</div> : messages.map((item, i) => {
-                    return <li key = {item.id}>{item.username}: {item.message} </li>
+                    return <li id = "message" key = {item.id}>{item.username}: {item.message} </li>
                   })
                   }
                 </ul>
@@ -206,8 +226,8 @@ class Home extends React.Component {
             </div>
             <form onSubmit = {this.submitMessage}>
               <input type="text" name="message" value= {message} onChange = {this.onChange} id = "message-input" />
-              <button type="submit" className = "btn btn-primary btn-sm" onClick = {this.submitMessage}>send message</button>
-              {/*<div hidden>{setTimeout(this.fetchMessages, 3000)}</div>*/}
+              <button type="submit" className = "btn btn-primary btn-sm mb-1" onClick = {this.submitMessage}>send message</button>
+            <div hidden>{setTimeout(this.fetchMessages, 3000)}</div>
             </form>
           </div>
         </div>

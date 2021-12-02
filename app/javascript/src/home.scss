@@ -1,6 +1,12 @@
-.message-list {
+#message-list {
   display: block;
   position: relative;
-  overflow: scroll;
-  height: 400px;
+
+}
+
+#container-ul {
+  display: flex;
+  flex-direction: column-reverse;
+  overflow: auto;
+  height: 500px;
 }

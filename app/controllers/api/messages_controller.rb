@@ -15,7 +15,6 @@ module Api
     def show
       # code
       @messages = Message.all
-      puts(@messages)
       render json: { message: @messages }
     end
 
