@@ -220,7 +220,7 @@ componentDidUpdate = () => {
         <div className = "container">
           <div className = "row d-flex">
             <div className = "col-12">
-              <div style = {{display: "flex", flexDirection: "column-reverse", overflow: "auto", height: "500px"}} id = "container-ul">
+              <div style = {{display: "flex", flexDirection: "column-reverse", overflow: "auto", height: "calc(100vh - 200px)", maxHeight: "800px"}} id = "container-ul">
                 <ul id = "message-list" ref = {this.boxRef} style = {{display: "block", position: "relative"}}>
                   {messages.length === 0? <div>you have no messages</div> : messages.map((item, i) => {
                     return <li id = "message" key = {item.id}>{item.username}: {item.message} </li>
