@@ -45,15 +45,13 @@ class Home extends React.Component {
 
     })
 
+    this.fetchMessages();
 
-  this.fetchMessages();
+    let test = setInterval(() => {
+      this.fetchMessages();
+    }, 3000)
 
-
-  const cookies = new Cookies();
-
-
-  console.log(cookies.get('guestUser'));
-
+    const cookies = new Cookies();
 
   }
 
@@ -100,7 +98,7 @@ componentDidUpdate = () => {
     fetch("/api/messages")
     .then(handleErrors)
     .then(res => {
-
+      console.log('here');
       this.setState({
         messages: res.message,
         username: this.state.guestUser
@@ -146,8 +144,6 @@ componentDidUpdate = () => {
       let chatWindow = document.getElementById('container-ul');
       this.scrollButton(chatWindow);
 
-      console.log(cookies.get('guestUser'));
-      console.log('here');
     })
 
   }
@@ -232,7 +228,6 @@ componentDidUpdate = () => {
             <form onSubmit = {this.submitMessage}>
               <input type="text" name="message" value= {message} onChange = {this.onChange} id = "message-input" />
               <button type="submit" className = "btn btn-primary btn-sm mb-1 ml-2" onClick = {this.submitMessage}>send message</button>
-            <div hidden>{setTimeout(this.fetchMessages, 3000)}</div>
             </form>
           </div>
         </div>
