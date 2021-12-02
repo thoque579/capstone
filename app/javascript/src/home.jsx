@@ -219,7 +219,7 @@ componentDidUpdate = () => {
         </div>
         <div className = "container">
           <div className = "row d-flex">
-            <div className = "col-12">
+            <div className = "col-12 mb-3 border border-dark">
               <div style = {{display: "flex", flexDirection: "column-reverse", overflow: "auto", height: "calc(100vh - 300px)", maxHeight: "800px"}} id = "container-ul">
                 <ul id = "message-list" ref = {this.boxRef} style = {{display: "block", position: "relative"}}>
                   {messages.length === 0? <div>you have no messages</div> : messages.map((item, i) => {
@@ -231,7 +231,7 @@ componentDidUpdate = () => {
             </div>
             <form onSubmit = {this.submitMessage}>
               <input type="text" name="message" value= {message} onChange = {this.onChange} id = "message-input" />
-              <button type="submit" className = "btn btn-primary btn-sm mb-1" onClick = {this.submitMessage}>send message</button>
+              <button type="submit" className = "btn btn-primary btn-sm mb-1 ml-2" onClick = {this.submitMessage}>send message</button>
             <div hidden>{setTimeout(this.fetchMessages, 3000)}</div>
             </form>
           </div>
