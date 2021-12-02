@@ -58,13 +58,13 @@ class Home extends React.Component {
   }
 
 
-      scrollToBottom = () => {
-        this.boxRef.current.scrollTop = this.boxRef.current.scrollHeight - this.boxRef.current.clientHeight;
-      }
+scrollToBottom = () => {
+  this.boxRef.current.scrollTop = this.boxRef.current.scrollHeight - this.boxRef.current.clientHeight;
+}
 
-      componentDidUpdate = () => {
-           this.scrollToBottom()
-       }
+componentDidUpdate = () => {
+     this.scrollToBottom()
+ }
 
   loginGuest = (e) => {
 
