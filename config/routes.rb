@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       #message
       post '/message/create' => 'messages#create'
       get '/messages' => 'messages#show'
+      delete '/messages/delete' => 'messages#delete'
 
       #
       get '/group' => 'group#getGroup'

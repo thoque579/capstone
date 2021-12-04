@@ -19,6 +19,17 @@ module Api
     end
 
 
+    def delete
+      # code
+      @message = Message.all
+
+      if @message.delete_all
+        render json: { success: 'deleted'}
+      else
+        render json: { error: 'something went wrong'}
+      end
+    end
+
     private
     def message_params
       params.require(:message).permit(:message)

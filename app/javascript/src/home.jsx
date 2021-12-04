@@ -16,7 +16,6 @@ if (typeof cookie.get('guestUser') === "undefined") {
   defaultGuestUser = cookie.get('guestUser');
 }
 
-
 class Home extends React.Component {
   constructor(props) {
     super(props)
@@ -27,24 +26,20 @@ class Home extends React.Component {
       newUser: '',
       error: '',
       messages: [],
-      groupChatName: ''
+      groupChatName: '',
+      newGroupChatName: 'tst',
     }
     this.fetchMessages = this.fetchMessages.bind(this);
+    this.fetchGroup = this.fetchGroup.bind(this);
   }
-
-
   componentDidMount() {
-    this.fetchGroup();
     this.fetchMessages();
 
-    // let test = setInterval(() => {
-    //   this.fetchMessages();
-    //
-    // }, 3000)
+    let test = setInterval(() => {
+      this.fetchMessages();
+    }, 3000)
+
     const cookies = new Cookies();
-
-
-
   }
 
 
@@ -72,7 +67,6 @@ componentDidUpdate = () => {
     fetch("/api/messages")
     .then(handleErrors)
     .then(res => {
-      console.log('here');
       this.setState({
         messages: res.message,
         username: this.state.guestUser
@@ -84,15 +78,13 @@ componentDidUpdate = () => {
     fetch('/api/group')
     .then(handleErrors)
     .then(res => {
-      console.log(res);
       this.setState({
-        groupChatName: res.group[0].groupName
+        groupChatName: res.group[0].groupName,
       })
     })
   }
 
   updateGroup = (e) => {
-
     if (e) {
       e.preventDefault();
       this.setState({
@@ -113,13 +105,28 @@ componentDidUpdate = () => {
     }))
     .then(handleErrors)
     .then(res => {
-      console.log(res.group.groupName);
-      console.log(res.group);
-      this.fetchGroup()
+      this.setState({
+        newGroupChatName: res.group.groupName,
+        groupChatName: '',
+      })
     })
   }
 
+  deleteAllMessages = (e) => {
+    if (e) {
+      e.preventDefault();
+    }
 
+    fetch('/api/messages/delete', safeCredentials({
+      method: "DELETE",
+    }))
+    .then(handleErrors)
+    .then(res => {
+      console.log(res);
+    })
+    this.fetchMessages();
+
+  }
   onChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value,
@@ -127,9 +134,7 @@ componentDidUpdate = () => {
   }
 
   submitMessage = (e) => {
-
     const { message } = this.state;
-
     if (e) {
       e.preventDefault();
       this.setState({
@@ -156,38 +161,13 @@ componentDidUpdate = () => {
       cookies.set('guestUser', this.state.guestUser, { path: '/' });
       let chatWindow = document.getElementById('container-ul');
       this.scrollButton(chatWindow);
-
     })
-
   }
 
   scrollButton = (id) => {
     id.scrollTop = id.scrollHeight - id.clientHeight;
   }
-  createGuest = (e) => {
-    if (e) {
-      e.preventDefault();
-      this.setState({
-        error: '',
-      })
-    }
 
-    fetch('/api/users/update', safeCredentials({
-      method: "POST",
-      body: JSON.stringify({
-        user: {
-          username: this.state.newUser
-        }
-      })
-    }))
-    .then(handleErrors)
-    .then(res => {
-      if (res.success) {
-        this.loginGuest();
-      }
-    })
-
-  }
   handleChange = (e) => {
     this.setState({
       guestUser: e.target.value,
@@ -195,19 +175,18 @@ componentDidUpdate = () => {
   }
 
   render() {
-    const { authenticated, message, guestUser, messages, newUser, groupChatName } = this.state;
-
+    const { authenticated, message, guestUser, messages, newUser, groupChatName, newGroupChatName } = this.state;
     return(
-
-
       <Layout>
         <div className = "container">
           <div className = "row">
             <div className = "col-12">
+
+              <p> <label>Name of Group chat</label>: {newGroupChatName}</p>
               <form onSubmit = {this.updateGroup}>
-                <label className = "mr-2">Name of group chat</label>
+                <label className = "mr-2">Update name of group chat</label>
                 <input type="text" name="groupChatName" className = "mr-2" value={groupChatName} onChange = {this.onChange}/>
-                <button type="submit" className = "btn btn-success">update</button>
+                <button type="submit" className = "btn btn-success btn-sm">update</button>
               </form>
                 <label className = "mr-2">Guest User</label>
                 <input type="text" value = {guestUser} onChange = {this.handleChange} className = "mr-2" required/>
@@ -227,9 +206,11 @@ componentDidUpdate = () => {
               </div>
             </div>
             <form onSubmit = {this.submitMessage}>
-              <input type="text" name="message" value= {message} onChange = {this.onChange} id = "message-input" placeholder = "send a message" required/>
+              <input type="text" name="message" value= {message} onChange = {this.onChange} id = "message-input" placeholder = "Send a message" required/>
               <button type="submit" className = "btn btn-primary btn-sm mb-1 ml-2">send message</button>
             </form>
+            {messages.length === 0?  <button className="btn btn-danger ml-2 mb-1 btn-sm" onClick={this.deleteAllMessages} disabled>clear</button> : <button className="btn btn-danger ml-3" onClick = {this.deleteAllMessages}>clear</button>}
+
           </div>
         </div>
       </Layout>
