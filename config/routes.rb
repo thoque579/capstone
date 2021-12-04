@@ -16,5 +16,8 @@ Rails.application.routes.draw do
       post '/message/create' => 'messages#create'
       get '/messages' => 'messages#show'
 
+      #
+      get '/group' => 'group#getGroup'
+      put '/group/update' => 'group#update'
     end
 end

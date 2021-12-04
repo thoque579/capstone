@@ -18,40 +18,32 @@ if (typeof cookie.get('guestUser') === "undefined") {
 
 
 class Home extends React.Component {
-
   constructor(props) {
     super(props)
     this.boxRef = React.createRef()
     this.state = {
-      authenticated: false,
       message: '',
       guestUser: defaultGuestUser,
       newUser: '',
       error: '',
-      messages: []
+      messages: [],
+      groupChatName: ''
     }
     this.fetchMessages = this.fetchMessages.bind(this);
   }
 
 
   componentDidMount() {
-    fetch('/api/authenticated')
-    .then(handleErrors)
-    .then(res => {
-      this.setState({
-        authenticated: res.authenticated
-      })
-
-
-    })
-
+    this.fetchGroup();
     this.fetchMessages();
 
-    let test = setInterval(() => {
-      this.fetchMessages();
-    }, 3000)
-
+    // let test = setInterval(() => {
+    //   this.fetchMessages();
+    //
+    // }, 3000)
     const cookies = new Cookies();
+
+
 
   }
 
@@ -74,24 +66,6 @@ componentDidUpdate = () => {
         error: '',
       })
     }
-
-    fetch('/api/sessions', safeCredentials({
-      method: "POST",
-      body: JSON.stringify({
-        user: {
-          username: newUser,
-        }
-      })
-    }))
-    .then(handleErrors)
-    .then(res => {
-      if (res.success) {
-        const redirect_url = "/"
-        window.location.href = redirect_url
-      } else {
-        console.log('fail')
-      }
-    })
   }
 
   fetchMessages = () => {
@@ -103,6 +77,45 @@ componentDidUpdate = () => {
         messages: res.message,
         username: this.state.guestUser
       })
+    })
+  }
+
+  fetchGroup = () => {
+    fetch('/api/group')
+    .then(handleErrors)
+    .then(res => {
+      console.log(res);
+      this.setState({
+        groupChatName: res.group[0].groupName
+      })
+    })
+  }
+
+  updateGroup = (e) => {
+
+    if (e) {
+      e.preventDefault();
+      this.setState({
+        error: '',
+      })
+    }
+
+    const { groupChatName } = this.state;
+
+    fetch('/api/group/update', safeCredentials({
+      method: "PUT",
+      body: JSON.stringify({
+        group: {
+          id: '1',
+          groupName: groupChatName,
+        }
+      })
+    }))
+    .then(handleErrors)
+    .then(res => {
+      console.log(res.group.groupName);
+      console.log(res.group);
+      this.fetchGroup()
     })
   }
 
@@ -159,7 +172,7 @@ componentDidUpdate = () => {
       })
     }
 
-    fetch('/api/users/create', safeCredentials({
+    fetch('/api/users/update', safeCredentials({
       method: "POST",
       body: JSON.stringify({
         user: {
@@ -182,22 +195,7 @@ componentDidUpdate = () => {
   }
 
   render() {
-    const { authenticated, message, guestUser, messages, newUser } = this.state;
-
-
-    {/*if (!authenticated) {
-      return (
-        <Layout>
-
-        </Layout>
-      )
-    }*/}
-
-
-    const myStyleTwo = {
-      display: "block",
-      position: "relative",
-    }
+    const { authenticated, message, guestUser, messages, newUser, groupChatName } = this.state;
 
     return(
 
@@ -206,10 +204,13 @@ componentDidUpdate = () => {
         <div className = "container">
           <div className = "row">
             <div className = "col-12">
-              <form onSubmit = {this.createGuest}>
+              <form onSubmit = {this.updateGroup}>
+                <label className = "mr-2">Name of group chat</label>
+                <input type="text" name="groupChatName" className = "mr-2" value={groupChatName} onChange = {this.onChange}/>
+                <button type="submit" className = "btn btn-success">update</button>
+              </form>
                 <label className = "mr-2">Guest User</label>
                 <input type="text" value = {guestUser} onChange = {this.handleChange} className = "mr-2" required/>
-              </form>
             </div>
           </div>
         </div>
@@ -226,8 +227,8 @@ componentDidUpdate = () => {
               </div>
             </div>
             <form onSubmit = {this.submitMessage}>
-              <input type="text" name="message" value= {message} onChange = {this.onChange} id = "message-input" />
-              <button type="submit" className = "btn btn-primary btn-sm mb-1 ml-2" onClick = {this.submitMessage}>send message</button>
+              <input type="text" name="message" value= {message} onChange = {this.onChange} id = "message-input" placeholder = "send a message" required/>
+              <button type="submit" className = "btn btn-primary btn-sm mb-1 ml-2">send message</button>
             </form>
           </div>
         </div>
