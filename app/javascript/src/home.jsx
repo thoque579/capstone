@@ -6,14 +6,23 @@ import { safeCredentials, handleErrors } from '@utils/fetchHelper';
 import Cookies from 'universal-cookie';
 import './home.scss'
 
-let defaultGuestUser = "newGuest"
-
+let defaultGuestUser = "guestUser"
+let defaultGroupChat = ""
 let cookie = new Cookies();
 cookie.get('guestUser');
 if (typeof cookie.get('guestUser') === "undefined") {
 
 } else {
   defaultGuestUser = cookie.get('guestUser');
+}
+
+let cookiesTwo = new Cookies();
+cookiesTwo.get('newGroupChatName')
+
+if (typeof cookiesTwo.get('newGroupChatName') === "undefined") {
+  defaultGroupChat = "Guest Group"
+} else {
+  defaultGroupChat = cookiesTwo.get('newGroupChatName');
 }
 
 class Home extends React.Component {
@@ -27,7 +36,7 @@ class Home extends React.Component {
       error: '',
       messages: [],
       groupChatName: '',
-      newGroupChatName: 'tst',
+      newGroupChatName: defaultGroupChat,
     }
     this.fetchMessages = this.fetchMessages.bind(this);
     this.fetchGroup = this.fetchGroup.bind(this);
@@ -109,6 +118,8 @@ componentDidUpdate = () => {
         newGroupChatName: res.group.groupName,
         groupChatName: '',
       })
+      const cookies = new Cookies();
+      cookies.set("newGroupChatName", this.state.newGroupChatName, { path: '/'});
     })
   }
 
@@ -184,7 +195,7 @@ componentDidUpdate = () => {
 
               <p> <label>Name of Group chat</label>: {newGroupChatName}</p>
               <form onSubmit = {this.updateGroup}>
-                <label className = "mr-2">Update name of group chat</label>
+                <label className = "mr-2">Update groupchat name</label>
                 <input type="text" name="groupChatName" className = "mr-2" value={groupChatName} onChange = {this.onChange}/>
                 <button type="submit" className = "btn btn-success btn-sm">update</button>
               </form>
@@ -209,7 +220,7 @@ componentDidUpdate = () => {
               <input type="text" name="message" value= {message} onChange = {this.onChange} id = "message-input" placeholder = "Send a message" required/>
               <button type="submit" className = "btn btn-primary btn-sm mb-1 ml-2">send message</button>
             </form>
-            {messages.length === 0?  <button className="btn btn-danger ml-2 mb-1 btn-sm" onClick={this.deleteAllMessages} disabled>clear</button> : <button className="btn btn-danger ml-3" onClick = {this.deleteAllMessages}>clear</button>}
+            {messages.length === 0?  <button className="btn btn-danger ml-2 mb-1 btn-sm" onClick={this.deleteAllMessages} disabled>clear</button> : <button className="btn btn-danger ml-2 mb-1 btn-sm" onClick = {this.deleteAllMessages}>clear</button>}
 
           </div>
         </div>
