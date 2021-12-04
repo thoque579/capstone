@@ -6,7 +6,7 @@ module Api
     end
 
     def update
-      @group = Group.find_by(params[:group][:id])
+      @group = Group.find(params[:group][:id])
       puts(@group.groupName)
 
       if @group.update(params.require(:group).permit(:id, :groupName))
