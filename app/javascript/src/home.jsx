@@ -43,7 +43,10 @@ class Home extends React.Component {
   }
   componentDidMount() {
     this.fetchMessages();
-
+    this.fetchGroup();
+    let test2 = setInterval(() => {
+      this.fetchGroup();
+    }, 2000)
     let test = setInterval(() => {
       this.fetchMessages();
     }, 3000)
@@ -88,7 +91,7 @@ componentDidUpdate = () => {
     .then(handleErrors)
     .then(res => {
       this.setState({
-        groupChatName: res.group[0].groupName,
+        newGroupChatName: res.group[0].groupName,
       })
     })
   }
