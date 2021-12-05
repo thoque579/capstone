@@ -64,6 +64,10 @@ Install Bundle
 bundle install
 ```
 
+Install Universal Cookie
+```bash
+npm install universal-cookie
+```
 
 ## User stories
 
