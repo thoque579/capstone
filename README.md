@@ -49,6 +49,10 @@ I first created the models for group and added two new columns called username a
 	
 ## Installation instructions:
 
+In your terminal 
+```bash
+git clone 'https://github.com/thoque579/capstone.git'
+```
 	
 
 
