@@ -73,7 +73,9 @@ npm install universal-cookie
 
 ## User stories
 
-So far my users are just some close associates I have. They told me that my product is a complete product for now and it is functional. But I should add more features such as a seperate login system that allows users to login with a real account, the ability to create individual group chats and add other people on it, add an audio message feature etc. I'll keep updating the chat over time but for now this is the groupchat.
+So far my users are just some close associates I have. They told me that my product is a complete product for now and it is functional. But I should add more features such as a seperate login system that allows users to login with a real account, the ability to create individual group chats and add other people on it, add an audio message feature etc so its a more useable product for casual users or business associates.
+
+I'll keep updating the chat over time but for now this is the groupchat.
 
 
 
