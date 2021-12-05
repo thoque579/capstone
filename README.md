@@ -29,10 +29,20 @@ screenshot
 
 Project is created with
 
-  React.js - Frontend framework
-  Javascript - Frontend language
-  Ruby - Backend language
-  Ruby on rails - Backend framework
+  React.js [Frontend framework]
+  Javascript  [Frontend language]
+  Ruby  [Backend language]
+  Ruby on rails  [Backend framework]
+  
+  
+  
+  
+## General approach
+
+I made this application in ruby on rails with react being its primary frontend framework. At first when I was trying to make this chat, I was trying to hard code a guest and a login/signup
+  
+  
+  
   
 	
 ## Installation instructions:
