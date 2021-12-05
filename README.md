@@ -66,7 +66,7 @@ I first created the models for group and added two new columns called username a
 ![image](https://user-images.githubusercontent.com/53666501/144756380-88cd13b3-f630-4a2b-a2f9-072c25369d4b.png)
 
 
-## unsolved problems/hurdles
+## Unsolved problems/hurdles
 
 ## Problem #1:
 
