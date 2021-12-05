@@ -26,7 +26,7 @@ This product is still in its beta form and their will be additional features add
 
 Project is created with
 
-  - React.js [Frontend framework],
+  - [React.js](https://reactjs.org/) [Frontend framework],
   - Javascript  [Frontend language],
   - Ruby  [Backend language],
   - Ruby on rails  [Backend framework]
