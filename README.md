@@ -26,10 +26,10 @@ This product is still in its beta form and their will be additional features add
 
 Project is created with
 
-  - [React.js](https://reactjs.org/) [Frontend framework],
-  - [Javascript](https://www.javascript.com/)  [Frontend language],
-  - [Ruby](https://www.ruby-lang.org/en/)  [Backend language],
-  - [Ruby on rails](https://rubyonrails.org/)  [Backend framework]
+  - [React.js](https://reactjs.org/)
+  - [Javascript](https://www.javascript.com/)
+  - [Ruby](https://www.ruby-lang.org/en/)
+  - [Ruby on rails](https://rubyonrails.org/)
   
   
   
