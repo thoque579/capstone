@@ -73,7 +73,7 @@ npm install universal-cookie
 
 ## User stories
 
-
+	So far my users are just some close associates I have. They told me that my product is a complete product for now and it is functional. But I should add more features such as a seperate login system that allows users to login with a real account, the ability to create individual group chats and add other people on it, add an audio message feature etc. I'll keep updating the chat over time but for now this is the groupchat.
 
 
 
@@ -95,5 +95,8 @@ There is still an unsolved issue regarding getting live message updates with thi
 
 ## Problem #3:
 
-While I was close to finishing this project, I encountered another problem where the username was not saving after I reloaded the page and that made sense because I didn't implement a real signup/login with assigning a token system. So, I was stuck and did some digging in teh interenet on what can I do. I installed a package known as universal cookie which allowed me to set and get cookies from the users computer and save their information onto the website. This was a big fix for me because it allowed me to save the users infomration such as their username without having to making more model associations and changes to my database.
+While I was close to finishing this project, I encountered another problem where the username was not saving after I reloaded the page and that made sense because I didn't implement a real signup/login with assigning a token system. So, I was stuck and did some digging in teh internet on what can I do. I installed a package known as universal cookie which allowed me to set and get cookies from the users computer and save their information onto the website. This was a big fix for me because it allowed me to save the users infomration such as their username without having to making more model associations and changes to my database.
 
+
+## Contact
+- [github](https://github.com/thoque579)
