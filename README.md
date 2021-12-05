@@ -1,24 +1,24 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+#GroupChat
 
-Things you may want to cover:
 
-* Ruby version
+screenshot
+![image](https://user-images.githubusercontent.com/53666501/144756153-2e36e177-cd56-40fe-9158-464f676d2678.png)
 
-* System dependencies
+##Technologies:
 
-* Configuration
+Project is created with
 
-* Database creation
+  React.js - Frontend framework
+  Javascript - Frontend language
+  Ruby - Backend language
+  Ruby on rails - Backend framework
+  
+	
+##Installation instructions:
 
-* Database initialization
+	GroupChat requires Yarn to function properly
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
-
-* ...
