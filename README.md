@@ -6,7 +6,7 @@
 screenshot
 ![image](https://user-images.githubusercontent.com/53666501/144756153-2e36e177-cd56-40fe-9158-464f676d2678.png)
 
-##Technologies:
+## Technologies:
 
 Project is created with
 
@@ -16,9 +16,24 @@ Project is created with
   Ruby on rails - Backend framework
   
 	
-##Installation instructions:
+## Installation instructions:
 
-	GroupChat requires Yarn to function properly
+	
 
 
+
+## user stries
+
+
+
+
+
+
+
+## wireframes
+
+![image](https://user-images.githubusercontent.com/53666501/144756380-88cd13b3-f630-4a2b-a2f9-072c25369d4b.png)
+
+
+## problems
 
