@@ -67,6 +67,7 @@ My general approach to programming this
 
 When I was first starting this project, I was having a hard time figuring out on how to implement a guest account feature and a login feature because I didn't understand how to make a login system without implementing tokens and cookies. So, I was stuck till I decided to throw that idea all together because it seemed to coomplicated. Instead I decided to make a maessage table with a username column added to it. I then seeded the data with some initial values for the username as the guest account and used that username column to reference the messages instead of making a whole user model with validations and adding a conditional to figure out whether the new user is a guest account or an actual user. The initial feature is something that I'll implement in the future but for now this is what I am working.
 
+## Problem #2:
 There is still an unsolved issue regarding getting live message updates with this application. I used a set interval function to fire another function just fetches any new messages from the database. In my opinion, this seems like a really strange way to recieve live message updates, but figuring out how to use and implement websockets seemed too complicated to use. So, I used this approach instead of the websocket approach. Once I do figure out how websocket works I am hoping for the future I am able to use that instead of a set interval function because its cleaner and less buggy than using a set interval function.
 
 
