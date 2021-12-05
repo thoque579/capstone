@@ -53,8 +53,11 @@ In your terminal
 ```bash
 git clone 'https://github.com/thoque579/capstone.git'
 ```
-	
 
+Install Bundle
+```bash
+bundle install
+```
 
 
 ## User stories
