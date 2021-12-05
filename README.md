@@ -1,4 +1,4 @@
-# README
+
 
 # GroupChat
 
@@ -7,11 +7,11 @@
 
 
 ## Features
-- Users are able to send messages to one another
+	- Users are able to send messages to one another
 	- Messages will be updated live on the chat rooms
-	- No login required, a username will be provided for first time 	users
+	- No login required, a username will be provided for first time users
 	- Users are allowed to customize their own usernames
-	- Users are provided with a default chat name but can customize 	them if they wish to.
+	- Users are provided with a default chat name but can customize them if they wish to.
 	- Users are able to clear chats
 
 	
