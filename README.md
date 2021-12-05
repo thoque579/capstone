@@ -26,10 +26,10 @@ screenshot
 
 Project is created with
 
-  React.js [Frontend framework],
-  Javascript  [Frontend language],
-  Ruby  [Backend language],
-  Ruby on rails  [Backend framework]
+  - React.js [Frontend framework],
+  - Javascript  [Frontend language],
+  - Ruby  [Backend language],
+  - Ruby on rails  [Backend framework]
   
   
   
