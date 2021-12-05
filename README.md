@@ -19,7 +19,7 @@ This product is still in its beta form and their will be additional features add
 - Users are able to clear chats
 
 	
-screenshot
+## Application
 ![image](https://user-images.githubusercontent.com/53666501/144756153-2e36e177-cd56-40fe-9158-464f676d2678.png)
 
 ## Technologies:
