@@ -54,6 +54,11 @@ In your terminal
 git clone 'https://github.com/thoque579/capstone.git'
 ```
 
+Install Yarn
+```bash
+npm install --global yarn
+```
+
 Install Bundle
 ```bash
 bundle install
