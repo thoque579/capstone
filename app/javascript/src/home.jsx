@@ -196,7 +196,7 @@ componentDidUpdate = () => {
           <div className = "row">
             <div className = "col-12">
 
-              <p> <label>Name of Group chat</label>: {newGroupChatName}</p>
+              <h5> <label>Name of Group chat</label>: {newGroupChatName}</h5>
               <form onSubmit = {this.updateGroup}>
                 <label className = "mr-2">Update groupchat name</label>
                 <input type="text" name="groupChatName" className = "mr-2" value={groupChatName} onChange = {this.onChange}/>
@@ -211,7 +211,7 @@ componentDidUpdate = () => {
           <div className = "row d-flex">
             <div className = "col-12 mb-3 border border-dark">
               <div style = {{display: "flex", flexDirection: "column-reverse", overflow: "auto", height: "calc(100vh - 300px)", maxHeight: "800px"}} id = "container-ul">
-                <ul id = "message-list" ref = {this.boxRef} style = {{display: "block", position: "relative"}}>
+                <ul id = "message-list" className="list-unstyled" ref = {this.boxRef} style = {{display: "block", position: "relative"}}>
                   {messages.length === 0? <div>you have no messages</div> : messages.map((item, i) => {
                     return <li id = "message" key = {item.id}>{item.username}: {item.message} </li>
                   })
